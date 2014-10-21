@@ -12,7 +12,7 @@ two:
   interface_language: MyString
   introduction: MyText
 
-two:
+xy:
   name: XnnYygn
   password_digest: <%= BCrypt::Password.create('secret') %>
   interface_language: zh_CN

@@ -18,7 +18,7 @@ class SessionControllerTest < ActionController::TestCase
 
   test "should delete destroy" do
     delete :destroy
-    assert_response :success
+    assert_redirected_to root_url
   end
 
 end
