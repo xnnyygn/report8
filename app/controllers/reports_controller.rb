@@ -6,7 +6,13 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.all
+    # TODO add filter for language
+    @department = determine_department
+    if @department
+      @reports = Report.where(author: User.where(department: @department))
+    else
+      @reports = Report.all
+    end
   end
 
   # GET /reports/1
@@ -27,15 +33,12 @@ class ReportsController < ApplicationController
   # POST /reports.json
   def create
     @report = Report.new(report_params)
+    @report.author = @current_user
 
-    respond_to do |format|
-      if @report.save
-        format.html { redirect_to @report, notice: 'Report was successfully created.' }
-        format.json { render :show, status: :created, location: @report }
-      else
-        format.html { render :new }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
-      end
+    if @report.save
+      redirect_to @report, notice: 'Report posted'
+    else
+      render :new
     end
   end
 
@@ -73,4 +76,18 @@ class ReportsController < ApplicationController
     def report_params
       params.require(:report).permit(:title, :language, :content)
     end
+
+    def determine_department
+      id = params[:department_id]
+
+      if id == 'my' and @current_user
+        @current_user.department
+      elsif id
+        begin
+          Department.find(id)
+        rescue ActiveRecord::RecordNotFound
+        end
+      end
+    end
+
 end

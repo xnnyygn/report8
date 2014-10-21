@@ -18,7 +18,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test "should create report" do
     assert_difference('Report.count') do
-      post :create, report: { content: @report.content, language: @report.language, title: @report.title, writer_id: @report.writer_id }
+      post :create, report: { content: @report.content, language: @report.language, title: @report.title }
     end
 
     assert_redirected_to report_path(assigns(:report))
@@ -35,7 +35,7 @@ class ReportsControllerTest < ActionController::TestCase
   end
 
   test "should update report" do
-    patch :update, id: @report, report: { content: @report.content, language: @report.language, title: @report.title, writer_id: @report.writer_id }
+    patch :update, id: @report, report: { content: @report.content, language: @report.language, title: @report.title }
     assert_redirected_to report_path(assigns(:report))
   end
 

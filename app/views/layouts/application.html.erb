@@ -7,16 +7,40 @@
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
-		<div>
-			<ul>
-				<li><%= link_to 'Home', root_path %></li>
-				<% unless logged_in? %>
-				<li><%= link_to 'Login', login_path %></li>
-				<% else %>
-				<li><%= link_to 'Logout', logout_path, method: :delete %></li>
-				<% end %>
-			</ul>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+			  <!-- Brand and toggle get grouped for better mobile display -->
+			  <div class="navbar-header">
+			    <%= link_to 'Report8', root_path, class: 'navbar-brand' %>
+			  </div>
+
+			  <!-- Collect the nav links, forms, and other content for toggling -->
+			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			    <ul class="nav navbar-nav">
+			      <li><%= link_to 'Write', new_report_path %></li>
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right">
+			      <% unless @current_user %>
+						<li><%= link_to 'Login', login_path %></li>
+						<% else %>
+						<li><%= link_to sanitize(@current_user.name), root_path %></li>
+						<li><%= link_to 'Logout', logout_path, method: :delete %></li>
+						<% end %>
+			    </ul>
+			  </div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		<div class="container">
+			<%= yield %>
 		</div>
-		<%= yield %>
+		<hr />
+		<div class="text-center">
+			Copyright
+			&copy;
+			XnnYygn 2014
+			<a href="https://twitter.com/XY8080" target="_blank">Twitter</a>
+			<a href="https://github.com/xnnyygn" target="_blank">GitHub</a>
+			<a href="http://blog.xnnyygn.in" target="_blank">Blog</a>
+		</div>
 	</body>
 </html>

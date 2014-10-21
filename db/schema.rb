@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020234256) do
+ActiveRecord::Schema.define(version: 20141021064135) do
 
   create_table "corrections", force: true do |t|
     t.integer  "sentence_id"
@@ -26,23 +26,20 @@ ActiveRecord::Schema.define(version: 20141020234256) do
 
   create_table "departments", force: true do |t|
     t.string   "name"
-    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "departments", ["creator_id"], name: "index_departments_on_creator_id"
-
   create_table "reports", force: true do |t|
     t.string   "title"
-    t.integer  "writer_id"
+    t.integer  "author_id"
     t.string   "language"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "reports", ["writer_id"], name: "index_reports_on_writer_id"
+  add_index "reports", ["author_id"], name: "index_reports_on_author_id"
 
   create_table "sentences", force: true do |t|
     t.integer  "report_id"

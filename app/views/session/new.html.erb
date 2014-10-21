@@ -1,19 +1,31 @@
-<h2>Login</h2>
-
 <% if alert %>
-<p class="alert"><%= alert %></p>
+<div class="row">
+	<div id="form-login-alert" class="alert alert-warning" role="alert">
+		<%= alert %>
+	</div>
+</div>
 <% end %>
 
-<%= form_tag login_path, method: :post do %>
-	<p>
-		<%= label_tag :name %>
-		<%= text_field_tag :name %>
-	</p>
-	<p>
-		<%= label_tag :password %>
-		<%= password_field_tag :password %>
-	</p>
-	<p>
-		<%= submit_tag 'Login' %>
-	</p>
+<div class="row">
+	<h2 class="col-sm-offset-4 col-sm-4">Login</h2>
+</div>
+
+<%= form_tag login_path, method: :post, id: 'form-login', class: 'form-horizontal', role: 'form' do %>
+  <div class="form-group">
+  	<%= label_tag :name, 'Name', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-4">
+    	<%= text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Name' %>
+    </div>
+  </div>
+  <div class="form-group">
+  	<%= label_tag :password, 'Password', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-4">
+    	<%= password_field_tag :password, nil, class: 'form-control', placeholder: 'Password' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+    	<%= submit_tag 'Login', class: 'btn btn-default' %>
+    </div>
+  </div>
 <% end %>

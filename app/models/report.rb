@@ -1,3 +1,5 @@
 class Report < ActiveRecord::Base
-  belongs_to :writer, class_name: 'User'
+	validates :title, :content, presence: true
+	
+  belongs_to :author, class_name: 'User'
 end
