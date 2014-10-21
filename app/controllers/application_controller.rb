@@ -6,10 +6,18 @@ class ApplicationController < ActionController::Base
 
   protected
   	def authorize
-  		user_id = session[:user_id]
-  		unless user_id and User.find(user_id)
+      user_id = session[:user_id]
+  		@user = User.find(user_id) if user_id
+
+      unless @user
   			redirect_to login_url
   		end
   	end
   	
+    def logged_in?
+      session[:user_id].present?
+    end
+
+    helper_method :logged_in?
+    
 end
