@@ -59,9 +59,21 @@ ready = ->
 		# show button
 		sentence_block.find('.btn-modify').show()
 
+		# enable submit corrections button
+		$('#btn-submit-corrections').removeAttr('disabled')
+
 	$('.btn-remove').click ->
 		if confirm('Do you really want to delete this correction?')
 			remove_correction($(this).parents('.sentence'))
+
+			# determine submit button status
+			# first disable button
+			$('#btn-submit-corrections').attr('disabled', 'disabled')
+			$('.sentence-modified').each ->
+				if $(this).val() == 'true'
+					$('#btn-submit-corrections').removeAttr('disabled')
+					# stop loop
+					return false
 
 	# initialize editors
 	tinymce.init
@@ -79,6 +91,9 @@ ready = ->
   	if confirm('Do you really want to delete all corrections?')
   		$('.sentence').each ->
   			remove_correction($(this))
+
+  		# disable submit
+  		$('#btn-submit-corrections').attr('disabled', 'disabled');
 
 remove_correction = (sentence_block) ->
 	# hide sentence-advice

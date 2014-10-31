@@ -46,6 +46,7 @@ class ReportsController < ApplicationController
   end
 
   def save_corrections
+    correction_count = 0
     params[:corrections].each do |id, c|
       if c[:modified] == 'true'
         correction = Correction.new
@@ -54,7 +55,16 @@ class ReportsController < ApplicationController
         # correction.comment = c[:comment]
         correction.advisor = @current_user
         correction.save
+
+        correction_count += 1
       end
+    end
+    # save correction count
+    if correction_count > 0
+      log = CorrectionLog.new
+      log.report = @report
+      log.advisor = @current_user
+      log.save
     end
     redirect_to @report
   end

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021064135) do
+ActiveRecord::Schema.define(version: 20141031061515) do
+
+  create_table "correction_logs", force: true do |t|
+    t.integer  "report_id"
+    t.integer  "advisor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "correction_logs", ["advisor_id"], name: "index_correction_logs_on_advisor_id"
+  add_index "correction_logs", ["report_id"], name: "index_correction_logs_on_report_id"
 
   create_table "corrections", force: true do |t|
     t.integer  "sentence_id"
