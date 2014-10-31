@@ -1,19 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @report.title %>
-</p>
+<h2><%= sanitize(@report.title) %></h2>
+<p><%= language(@report.language) %></p>
 
-<p>
-  <strong>Language:</strong>
-  <%= @report.language %>
-</p>
+<h3>Original</h3>
+<p><%= simple_format(@report.content) %></p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @report.content %>
-</p>
+<h3>Corrections</h3>
+<% @corrections.each do |c| %>
+<p><%= raw c.advice %></p>
+<% end %>
+
+<h3>Add Corrections</h3>
+<% if @report.sentences.any? %>
+<%= form_tag save_corrections_report_path(@report) do %>
+<% @report.sentences.each_with_index do |sentence, i| %>
+<div class="sentence">
+  <p><strong>Original Sentence</strong></p>
+	<p class="sentence-original"><%= sentence.line %></p>
+	<button type="button" class="btn btn-warning btn-modify">Modify</button>
+  <div class="sentence-advice">
+    <p class="sentence-correction"></p>
+    <p class="sentence-comment"></p>
+  	<button type="button" class="btn btn-danger btn-remove">Remove</button>
+  </div>
+  <div class="edit-pane">
+    <label for="sentence-editor">Correction</label>
+    <%= text_area_tag "corrections[#{sentence.id}][advice]", sentence.line, class: 'sentence-editor' %>
+    <%= hidden_field_tag "corrections[#{sentence.id}][modified]", false, class: 'sentence-modified' %>
+    <label for="sentence-comment-edit">Comment</label>
+    <%= text_area_tag "corrections[#{sentence.id}][comment]", '', class: 'sentence-comment-edit', rows: 1, cols: 50 %>
+		<button type="button" class="btn btn-primary btn-save">Save</button>
+		<button type="button" class="btn btn-cancel">Cancel</button>
+  </div>
+</div>
+<% end %>
+<div id="main-buttons" class="text-center">
+  <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-corrections">Submit Corrections</button>
+  <button type="button" class="btn" id="btn-reset-corrections">Reset</button>
+</div>
+<% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_report_path(@report) %> |
 <%= link_to 'Back', reports_path %>
+
+<%= tinymce_assets %>

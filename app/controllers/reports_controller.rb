@@ -1,7 +1,9 @@
+# require 'set'
+
 class ReportsController < ApplicationController
   
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:index]
+  before_action :set_report, only: [:show, :edit, :update, :destroy, :save_corrections]
+  skip_before_action :authorize, only: [:index, :show]
 
   # GET /reports
   # GET /reports.json
@@ -18,6 +20,7 @@ class ReportsController < ApplicationController
   # GET /reports/1
   # GET /reports/1.json
   def show
+    @corrections = Correction.where(sentence: Sentence.where(report: @report))
   end
 
   # GET /reports/new
@@ -40,6 +43,20 @@ class ReportsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def save_corrections
+    params[:corrections].each do |id, c|
+      if c[:modified] == 'true'
+        correction = Correction.new
+        correction.sentence = Sentence.find(id)
+        correction.advice = c[:advice]
+        # correction.comment = c[:comment]
+        correction.advisor = @current_user
+        correction.save
+      end
+    end
+    redirect_to @report
   end
 
   # PATCH/PUT /reports/1
@@ -89,5 +106,7 @@ class ReportsController < ApplicationController
         end
       end
     end
+
+    SENTENCE_MODIFIED_FLAG_PREFIX = 'sentence-modified-'
 
 end

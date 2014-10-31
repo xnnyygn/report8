@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
-  resources :reports
+  resources :reports do
+    post 'save_corrections', on: :member
+  end
 
   root 'reports#index'
 

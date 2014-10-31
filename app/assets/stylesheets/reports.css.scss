@@ -1,3 +1,42 @@
 // Place all the styles related to the Reports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sentence {
+	
+	padding: 10px;
+	border: 1px dashed #aaa;
+	border-bottom: none;
+
+	.edit-pane {
+		display: none;
+		
+		label {
+			margin-bottom: 10px;
+			margin-top: 10px;
+		}
+
+		textarea {
+			display: block;
+		}
+
+		button {
+			margin-top: 10px;
+		}
+
+		border-top: 1px dashed #ccc;
+	}
+
+	.sentence-advice {
+		display: none;
+
+		p {
+			margin-top: 10px;
+		}
+	}
+}
+
+#main-buttons {
+	padding: 10px 0;
+	border-top: 1px dashed #aaa;
+}
