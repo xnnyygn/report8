@@ -31,6 +31,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'tinymce-rails', '~> 3.5.9'
 
+gem 'kaminari'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

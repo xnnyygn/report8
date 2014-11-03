@@ -8,13 +8,14 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    # TODO add filter for language
-    @department = determine_department
-    if @department
-      @reports = Report.where(author: User.where(department: @department)).order(updated_at: :desc)
-    else
-      @reports = Report.order(updated_at: :desc)
-    end
+    # @department = determine_department
+    # if @department
+    #   @reports = Report.where(author: User.where(department: @department)).order(updated_at: :desc)
+    # else
+    #   @reports = Report.order(updated_at: :desc)
+    # end
+
+    @reports = Report.order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   # GET /reports/1
