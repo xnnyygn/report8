@@ -12,15 +12,17 @@
     prompt: 'all', onchange: 'this.form.submit();' %>
 <% end %>
 
-<% @reports.each do |report| %>
-<div class="report">
-	
-  <h3>
-    <%= link_to report_path(report) do %>
-    <%= sanitize(report.title) %>
-    <% end %>
-  </h3>
-  
-  <p><%= simple_format(report.content) %></p>
+<div class="list-group">
+  <% @reports.each do |report| %>
+  <div class="report list-group-item">
+  	<span class="badge"><%= report.correction_count %></span>
+    <h3>
+      <%= link_to report_path(report) do %>
+      <%= sanitize(report.title) %>
+      <% end %>
+    </h3>
+    <p><%= simple_format(report.content) %></p>
+    <p><%= report.author.name %></p>
+  </div>
+  <% end %>
 </div>
-<% end %>

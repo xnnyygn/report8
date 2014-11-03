@@ -2,17 +2,16 @@ class Report < ActiveRecord::Base
 	validates :title, :content, presence: true
 	
   belongs_to :author, class_name: 'User'
-  has_many :sentences #TODO order problem
+  has_many :sentences
+  has_many :correction_logs
 
-  before_save :save_sentences
+  def generate_sentences
+  	split_text(content).each do |sentence|
+  		sentences.build(line: sentence)
+  	end
+  end
 
   private
-
-  	def save_sentences
-  		split_text(content).each do |sentence|
-  			sentences.build(line: sentence)
-  		end
-  	end
 
   	DELIMITERS = Set.new(%w{。 ! . ?})
 

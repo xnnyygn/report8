@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.correction_block {
+}
+
+.panel {
+	h3.panel-heading {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
 .sentence {
 	
 	padding: 10px;
@@ -37,6 +47,6 @@
 }
 
 #main-buttons {
-	padding: 10px 0;
+	padding-top: 10px;
 	border-top: 1px dashed #aaa;
 }

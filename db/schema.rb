@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031061515) do
+ActiveRecord::Schema.define(version: 20141031075322) do
 
   create_table "correction_logs", force: true do |t|
     t.integer  "report_id"
@@ -29,9 +29,12 @@ ActiveRecord::Schema.define(version: 20141031061515) do
     t.integer  "advisor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "comment"
+    t.integer  "correction_log_id"
   end
 
   add_index "corrections", ["advisor_id"], name: "index_corrections_on_advisor_id"
+  add_index "corrections", ["correction_log_id"], name: "index_corrections_on_correction_log_id"
   add_index "corrections", ["sentence_id"], name: "index_corrections_on_sentence_id"
 
   create_table "departments", force: true do |t|
@@ -47,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141031061515) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "correction_count", default: 0
   end
 
   add_index "reports", ["author_id"], name: "index_reports_on_author_id"

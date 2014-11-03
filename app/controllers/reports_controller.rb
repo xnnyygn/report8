@@ -20,7 +20,6 @@ class ReportsController < ApplicationController
   # GET /reports/1
   # GET /reports/1.json
   def show
-    @corrections = Correction.where(sentence: Sentence.where(report: @report))
   end
 
   # GET /reports/new
@@ -37,6 +36,7 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @report.author = @current_user
+    @report.generate_sentences
 
     if @report.save
       redirect_to @report, notice: 'Report posted'
@@ -46,25 +46,45 @@ class ReportsController < ApplicationController
   end
 
   def save_corrections
-    correction_count = 0
-    params[:corrections].each do |id, c|
-      if c[:modified] == 'true'
-        correction = Correction.new
-        correction.sentence = Sentence.find(id)
-        correction.advice = c[:advice]
-        # correction.comment = c[:comment]
-        correction.advisor = @current_user
-        correction.save
+    # generate sentence map
+    sentence_map = {}
+    @report.sentences.each do |s|
+      sentence_map[s.id] = s
+    end
 
-        correction_count += 1
+    # filter corrections
+    corrections = []
+    params[:corrections].each do |id, c|
+      sentence_key = id.to_i
+      correction_data = {}
+      if c[:modified] == 'true' and sentence_map.include? sentence_key
+        correction_data[:sentence] = sentence_map[sentence_key]
+        correction_data[:advice] = c[:advice]
+        correction_data[:comment] = c[:comment]
+        correction_data[:advisor] = @current_user
+        corrections << correction_data
       end
     end
-    # save correction count
-    if correction_count > 0
-      log = CorrectionLog.new
-      log.report = @report
-      log.advisor = @current_user
-      log.save
+
+    if corrections.any?
+      Report.transaction do
+        # save correction log
+        log = CorrectionLog.new
+        log.report = @report
+        log.advisor = @current_user
+        log.save
+
+        # save corrections
+        corrections.each do |c|
+          c[:correction_log] = log
+          correction = Correction.new(c)
+          correction.save
+        end
+
+        # update correction count in report
+        @report.correction_count = CorrectionLog.where(report: @report).count
+        @report.save
+      end
     end
     redirect_to @report
   end
@@ -81,6 +101,8 @@ class ReportsController < ApplicationController
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
     end
+
+    # TODO regenerate sentences
   end
 
   # DELETE /reports/1
@@ -116,7 +138,5 @@ class ReportsController < ApplicationController
         end
       end
     end
-
-    SENTENCE_MODIFIED_FLAG_PREFIX = 'sentence-modified-'
 
 end
