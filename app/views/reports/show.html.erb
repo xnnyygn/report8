@@ -6,7 +6,9 @@
     |
     <a href="#"><%= @report.author.name %></a>
     |
+    <% if @report.author == @current_user %>
     <%= link_to 'Edit', edit_report_path(@report) %>
+    <% end %>
     <%= link_to 'Back', reports_path %>
   </small>
 </div>
@@ -15,15 +17,6 @@
   <h3 class="panel-heading">Original</h3>
   <div class="panel-body">
     <%= simple_format(@report.content) %>
-  </div>
-  <div class="panel-footer">
-    <%= language(@report.language) %>
-    <%= @report.created_at %>
-    |
-    <a href="#"><%= @report.author.name %></a>
-    |
-    <%= link_to 'Edit', edit_report_path(@report) %>
-    <%= link_to 'Back', reports_path %>
   </div>
 </div>
 
@@ -35,8 +28,12 @@
       <% log.corrections.each do |c| %>
       <div class="correcton">
         <p class="correction-original-sentence"><%= c.sentence.line %></p>
-        <p class="correction-modified-sentence"><%= raw c.advice %></p>
-        <p class="correction-comment"><%= c.comment %></p>
+        <div class="correction-modified-sentence"><%= raw c.advice %></div>
+        <% if c.comment %>
+        <p class="correction-comment"> 
+          <%= c.comment %>
+        </p>
+        <% end %>
       </div>
       <% end %>
     </div>
@@ -77,8 +74,9 @@
     <% end %>
     <% end %>
   </div>
+  <div class="panel-footer">
+    <%= link_to 'Back', reports_path %>
+  </div>
 </div>
-
-
 
 <%= tinymce_assets %>

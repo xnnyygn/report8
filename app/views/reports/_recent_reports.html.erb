@@ -1,0 +1,17 @@
+<div class="panel panel-info recent-reports">
+	<h2 class="panel-heading">Recent Reports</h2>
+	<div class="panel-body">
+		<% if @recent_reports.present? %>
+		<ul class="list-group">
+			<% @recent_reports.each do |r| %>
+			<li class="list-group-item">
+				<span class="badge"><%= r.correction_count %></span>
+				<%= link_to r.title, report_path(r) %>
+			</li>
+			<% end %>
+		</ul>
+		<% else %>
+		<p>No report.</p>
+		<% end %>
+	</div>
+</div>

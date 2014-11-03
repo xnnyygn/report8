@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
   
   before_action :set_report, only: [:show, :edit, :update, :destroy, :save_corrections]
   skip_before_action :authorize, only: [:index, :show]
+  before_action :set_recent_reports, only: [:index, :new, :show, :edit]
 
   # GET /reports
   # GET /reports.json
@@ -138,6 +139,10 @@ class ReportsController < ApplicationController
         rescue ActiveRecord::RecordNotFound
         end
       end
+    end
+
+    def set_recent_reports
+      @recent_reports = Report.where(author: @current_user).order(updated_at: :desc).limit(5)
     end
 
 end

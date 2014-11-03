@@ -1,30 +1,30 @@
-<h2>Reports</h2>
-
-<%= form_tag root_path, method: :get, enforce_utf8: false do %>
-  <%= label_tag :department_id, 'Department: ' %>
-
-  <% if @current_user %>
-  <%= link_to 'Mine', root_url(department_id: 'my') %>
-  <% end %>
-  
-  <%= select_tag :department_id, 
-    options_from_collection_for_select(Department.all, 'id', 'name', (@department.id if @department)),
-    prompt: 'all', onchange: 'this.form.submit();' %>
-<% end %>
-
-<div class="list-group">
-  <% @reports.each do |report| %>
-  <div class="report list-group-item">
-  	<span class="badge"><%= report.correction_count %></span>
-    <h3>
-      <%= link_to report_path(report) do %>
-      <%= sanitize(report.title) %>
-      <% end %>
-    </h3>
-    <p><%= simple_format(report.content) %></p>
-    <p><%= report.author.name %></p>
+<div class="row">
+  <div class="col-sm-8">
+    <div class="panel panel-primary"> 
+      <h2 class="panel-heading">Reports</h2>
+      <div class="panel-body">
+        <% @reports.each do |report| %>
+        <div class="report">
+          <h3>
+            <%= link_to report_path(report) do %>
+            <%= report.title %>
+            <span class="badge"><%= report.correction_count %></span>
+            <% end %>
+          </h3>
+          <p><%= truncate(report.content, length: 200) %></p>
+          <p class="text-right">
+            <%= link_to report.author.name, '#' %>
+            <%= report.created_at %>
+          </p>
+        </div>
+        <% end %>
+        <div class="text-center">
+          <%= paginate @reports %>
+        </div>
+      </div>
+    </div>
   </div>
-  <% end %>
+  <div class="col-sm-4">
+    <%= render 'recent_reports' %>
+  </div>
 </div>
-
-<%= paginate @reports %>
