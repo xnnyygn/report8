@@ -11,9 +11,9 @@ class ReportsController < ApplicationController
     # TODO add filter for language
     @department = determine_department
     if @department
-      @reports = Report.where(author: User.where(department: @department))
+      @reports = Report.where(author: User.where(department: @department)).order(updated_at: :desc)
     else
-      @reports = Report.all
+      @reports = Report.order(updated_at: :desc)
     end
   end
 
