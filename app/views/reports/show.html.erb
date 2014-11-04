@@ -41,6 +41,7 @@
 </div>
 <% end %>
 
+<% if @current_user %>
 <div class="panel panel-warning">
   <h3 class="panel-heading">Add Corrections</h3>
   <div class="panel-body">
@@ -78,5 +79,5 @@
     <%= link_to 'Back', reports_path %>
   </div>
 </div>
-
 <%= tinymce_assets %>
+<% end %>

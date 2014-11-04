@@ -1,0 +1,24 @@
+<div class="panel panel-primary"> 
+  <h2 class="panel-heading">Reports</h2>
+  <div class="panel-body">
+    <% @reports.each do |report| %>
+    <div class="report">
+      <h3>
+        <%= link_to report_path(report) do %>
+        <%= report.title %>
+        <span class="badge"><%= report.correction_count %></span>
+        <% end %>
+      </h3>
+      <p><%= truncate(report.content, length: 200) %></p>
+      <p class="text-right">
+        <%= link_to report.author.name, '#' %>
+        <%= language(report.language) %>
+        <%= report.created_at %>
+      </p>
+    </div>
+    <% end %>
+    <div class="text-center">
+      <%= paginate @reports %>
+    </div>
+  </div>
+</div>
