@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :title %><br>
+    <%= f.label :title, t('.title') %><br>
     <%= f.text_field :title, class: 'form-control', size: 50 %>
   </div>
   <div class="form-group">
-    <%= f.label :language %><br>
+    <%= f.label :language, t('.language') %><br>
     <%= f.select :language, options_for_select(LANGUAGES), {}, {class: 'form-control'} %>
   </div>
   <div class="form-group">
-    <%= f.label :content %><br>
+    <%= f.label :content, t('.content') %><br>
     <%= f.text_area :content, cols: 40, rows: 15, class: 'form-control' %>
   </div>
   <div class="text-center">
-    <%= f.submit 'Post Report', class: 'btn btn-lg btn-primary full-width' %>
+    <%= f.submit t('.post'), class: 'btn btn-lg btn-primary full-width' %>
   </div>
 <% end %>

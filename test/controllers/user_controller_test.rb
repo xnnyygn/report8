@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserControllerTest < ActionController::TestCase
   test "should get profile" do
-    get :profile
+    get :profile, id: users(:xy).id
     assert_response :success
   end
 

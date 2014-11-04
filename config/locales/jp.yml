@@ -1,0 +1,52 @@
+jp:
+  layouts:
+    application:
+      write: '書く'
+      profile: 'プロフィール'
+      settings: '設定'
+      logout: 'ログアウト'
+
+  reports:
+    index_reports:
+      reports: 'レポート'
+    recent_reports:
+      recent_reports: '最近のレポート'
+    show:
+      edit: '編集'
+      back: '戻る'
+      modify: '添削'
+      save: '保存'
+      cancel: '取り消す'
+      remove: '削除'
+      reset: 'リセット'
+      original: 'オリジナル'
+      correction: '添削'
+      add_correction: '新規添削'
+      original_sentence: 'オリジナル'
+      comment: 'コメント'
+      submit_correction: '転送'
+    new:
+      new_report: '新規レポート'
+      back: '戻る'
+    edit:
+      edit_report: 'レポート編集'
+      back: '戻る'
+    form:
+      title: 'タイトル'
+      language: '言語'
+      content: '内容'
+      post: '転送'
+  user:
+    profile:
+      title: "%{name}"
+      introduction: '自己紹介'
+      recent_reports: '最近のレポート'
+    settings:
+      title: '設定'
+      interface_language: 'インターフェイス言語'
+      introduction: '自己紹介'
+      save: '保存'
+
+  time:
+    formats:
+      default: '%Y-%m-%d %H:%M'

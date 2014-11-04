@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_current_user
   before_action :authorize
+  before_action :set_locale_from_user_settings
 
   protected
   	def authorize
@@ -25,4 +26,14 @@ class ApplicationController < ActionController::Base
       session.delete :user_id
     end
     
+    def set_locale_from_user_settings
+      I18n.locale = I18n.default_locale
+      if @current_user
+        lang = @current_user.interface_language
+        if I18n.available_locales.map(&:to_s).include? lang
+          I18n.locale = lang
+        end
+      end
+    end
+
 end

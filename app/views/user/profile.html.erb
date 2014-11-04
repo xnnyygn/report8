@@ -1,9 +1,9 @@
 <div class="panel panel-default" id="user-profile">
-	<div class="panel-heading">Profile of <%= @user.name %></div>
+	<div class="panel-heading"><%= t('.title', name: @user.name) %></div>
 	<div class="panel-body">
-		<h2>Introduction</h2>
+		<h2><%= t('.introduction') %></h2>
 		<div><%= simple_format(@user.introduction) %></div>
-		<h2>Recent Reports</h2>
+		<h2><%= t('.recent_reports') %></h2>
 		<% @recent_reports.each do |report| %>
 		  <div class="report">
 		    <h3>
@@ -14,7 +14,7 @@
 		    <p><%= truncate(report.content, length: 200) %></p>
 		    <p class="text-right">
 		      <%= language(report.language) %>
-		      <%= report.created_at %>
+		      <%= l(report.created_at) %>
 		    </p>
 		  </div>
 		<% end %>

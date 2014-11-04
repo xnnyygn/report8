@@ -4,8 +4,10 @@ one:
   title: MyString
   language: MyString
   content: MyText
+  author: xy
 
 two:
   title: MyString
   language: MyString
   content: MyText
+  author: xy

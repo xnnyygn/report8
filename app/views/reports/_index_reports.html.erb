@@ -1,5 +1,5 @@
 <div class="panel panel-primary"> 
-  <h2 class="panel-heading">Reports</h2>
+  <h2 class="panel-heading"><%= t('.reports') %></h2>
   <div class="panel-body">
     <% @reports.each do |report| %>
     <div class="report">
@@ -13,7 +13,7 @@
       <p class="text-right">
         <%= link_to report.author.name, user_profile_path(report.author) %>
         <%= language(report.language) %>
-        <%= report.created_at %>
+        <%= l(report.created_at) %>
       </p>
     </div>
     <% end %>

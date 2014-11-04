@@ -1,0 +1,52 @@
+zh:
+  layouts:
+    application:
+      write: '撰写'
+      profile: '个人信息'
+      settings: '设置'
+      logout: '登出'
+
+  reports:
+    index_reports:
+      reports: '报告'
+    recent_reports:
+      recent_reports: '最近自己的报告'
+    show:
+      edit: '编辑'
+      back: '返回'
+      modify: '修改'
+      save: '保存'
+      cancel: '取消'
+      remove: '移除'
+      reset: '重置'
+      original: '原文'
+      correction: '批改'
+      add_correction: '添加批改'
+      original_sentence: '原句'
+      comment: '评论'
+      submit_correction: '提交批改'
+    new:
+      new_report: '新报告'
+      back: '返回'
+    edit:
+      edit_report: '编辑报告'
+      back: '返回'
+    form:
+      title: '标题'
+      language: '语言'
+      content: '内容'
+      post: '提交'
+  user:
+    profile:
+      title: "%{name}的信息"
+      introduction: '个人介绍'
+      recent_reports: '最近的报告'
+    settings:
+      title: '设置'
+      interface_language: '界面语言'
+      introduction: '个人介绍'
+      save: '保存'
+
+  time:
+    formats:
+      default: '%Y年%m月%d日 %H:%M'

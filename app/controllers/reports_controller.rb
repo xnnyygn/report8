@@ -25,6 +25,11 @@ class ReportsController < ApplicationController
 
   # GET /reports/1/edit
   def edit
+    if @report.author != @current_user
+      redirect_to @report
+    elsif @report.correction_count > 0
+      redirect_to @report, notice: 'correction present'
+    end
   end
 
   # POST /reports
@@ -88,7 +93,9 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1
   # PATCH/PUT /reports/1.json
   def update
-    if @report.correction_count > 0
+    if @report.author != @current_user
+      redirect_to @report
+    elsif @report.correction_count > 0
       redirect_to @report, notice: 'correction present'
     else
       begin

@@ -20,4 +20,54 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  layouts:
+    application:
+      write: 'Write'
+      profile: 'Profile'
+      settings: 'Settings'
+      logout: 'Logout'
+
+  reports:
+    index_reports:
+      reports: 'Reports'
+    recent_reports:
+      recent_reports: 'Recent Reports'
+    show:
+      edit: 'Edit'
+      back: 'Back'
+      modify: 'Modify'
+      save: 'Save'
+      cancel: 'Cancel'
+      remove: 'Remove'
+      reset: 'Reset'
+      original: 'Original'
+      correction: 'Correction'
+      add_correction: 'Add Correction'
+      original_sentence: 'Original Sentence'
+      comment: 'Comment'
+      submit_correction: 'Submit Correction'
+    new:
+      new_report: 'New Report'
+      back: 'Back'
+    edit:
+      edit_report: 'Edit Report'
+      back: 'Back'
+    form:
+      title: 'Title'
+      language: 'Language'
+      content: 'Content'
+      post: 'Post'
+  user:
+    profile:
+      title: "Profile of %{name}"
+      introduction: 'Introduction'
+      recent_reports: 'Recent Reports'
+    settings:
+      title: 'Settings'
+      interface_language: 'Interface Language'
+      introduction: 'Introduction'
+      save: 'Save'
+
+  time:
+    formats:
+      default: '%Y-%m-%d %H:%M'

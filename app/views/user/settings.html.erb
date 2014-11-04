@@ -1,16 +1,16 @@
 <div class="panel panel-default">
-	<div class="panel-heading">Settings</div>
+	<div class="panel-heading"><%= t('.title') %></div>
 	<div class="panel-body">
 		<%= form_for @current_user, url: user_update_settings_path, html: {class: 'form form-report8'} do |f| %>
 			<div class="form-group">
-				<%= f.label :interface_language %>
-				<%= f.select :interface_language, options_for_select(LANGUAGES), {}, {class: 'form-control'} %>
+				<%= f.label :interface_language, t('.interface_language') %>
+				<%= f.select :interface_language, options_for_select(LANGUAGES, @current_user.interface_language), {}, {class: 'form-control'} %>
 			</div>
 			<div class="form-group">
-				<%= f.label :introduction %>
+				<%= f.label :introduction, t('.introduction') %>
 				<%= f.text_area :introduction, class: 'form-control', rows: 10 %>
 			</div>
-			<button type="submit" class="btn btn-primary">Save</button>
+			<button type="submit" class="btn btn-primary"><%= t('.save') %></button>
 		<% end %>
 	</div>
 </div>
