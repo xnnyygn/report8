@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/user/profile/:id', to: 'user#profile', as: 'user_profile'
   get '/user/settings'
+  patch '/user/update_settings'
 
   controller :session do
     get  'login' => :new

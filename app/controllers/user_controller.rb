@@ -14,4 +14,12 @@ class UserController < ApplicationController
   def settings
   end
 
+  def update_settings
+    if @current_user.update(params.require(:user).permit([:interface_language, :introduction]))
+      redirect_to user_profile_path(@current_user)
+    else
+      render :settings
+    end
+  end
+
 end
