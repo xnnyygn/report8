@@ -23,7 +23,7 @@
 			      <% unless @current_user %>
 						<li><%= link_to 'Login', login_path %></li>
 						<% else %>
-						<li><%= link_to sanitize(@current_user.name), root_path %></li>
+						<li><%= link_to sanitize(@current_user.name), user_profile_path(@current_user) %></li>
 						<li><%= link_to 'Logout', logout_path, method: :delete %></li>
 						<% end %>
 			    </ul>

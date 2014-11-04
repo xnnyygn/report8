@@ -10,7 +10,7 @@
     <%= language(@report.language) %>
     <%= @report.created_at %>
     |
-    <a href="#"><%= @report.author.name %></a>
+    <%= link_to @report.author.name, user_profile_path(@report.author) %>
     |
     <% if @report.author == @current_user %>
     <%= link_to 'Edit', edit_report_path(@report) %>

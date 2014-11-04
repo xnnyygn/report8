@@ -11,7 +11,7 @@
       </h3>
       <p><%= truncate(report.content, length: 200) %></p>
       <p class="text-right">
-        <%= link_to report.author.name, '#' %>
+        <%= link_to report.author.name, user_profile_path(report.author) %>
         <%= language(report.language) %>
         <%= report.created_at %>
       </p>

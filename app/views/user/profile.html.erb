@@ -1,0 +1,22 @@
+<div class="panel panel-default" id="user-profile">
+	<div class="panel-heading">Profile of <%= @user.name %></div>
+	<div class="panel-body">
+		<h2>Introduction</h2>
+		<div><%= simple_format(@user.introduction) %></div>
+		<h2>Recent Reports</h2>
+		<% @recent_reports.each do |report| %>
+		  <div class="report">
+		    <h3>
+		      <%= link_to report_path(report) do %>
+		      <%= report.title %>
+		      <% end %>
+		    </h3>
+		    <p><%= truncate(report.content, length: 200) %></p>
+		    <p class="text-right">
+		      <%= language(report.language) %>
+		      <%= report.created_at %>
+		    </p>
+		  </div>
+		<% end %>
+	</div>
+</div>
