@@ -9,13 +9,6 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    # @department = determine_department
-    # if @department
-    #   @reports = Report.where(author: User.where(department: @department)).order(updated_at: :desc)
-    # else
-    #   @reports = Report.order(updated_at: :desc)
-    # end
-
     @reports = Report.order(updated_at: :desc).page(params[:page]).per(10)
   end
 
@@ -94,23 +87,28 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1
   # PATCH/PUT /reports/1.json
   def update
-    respond_to do |format|
-      if @report.update(report_params)
-        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
-        format.json { render :show, status: :ok, location: @report }
-      else
-        format.html { render :edit }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
+    if @report.correction_count > 0
+      redirect_to @report, notice: 'correction present'
+    else
+      begin
+        Report.transaction do
+          @report.update!(report_params)
+          @report.sentences.destroy_all
+          @report.generate_sentences
+          @report.save!
+        end
+        redirect_to @report, notice: 'Report was successfully updated.'
+      rescue
+        render :edit
       end
     end
-
-    # TODO regenerate sentences
   end
 
   # DELETE /reports/1
   # DELETE /reports/1.json
   def destroy
-    @report.destroy
+    @report.destroy 
+    # TODO delete related models
     respond_to do |format|
       format.html { redirect_to reports_url, notice: 'Report was successfully destroyed.' }
       format.json { head :no_content }
