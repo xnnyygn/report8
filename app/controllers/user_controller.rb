@@ -1,14 +1,19 @@
 class UserController < ApplicationController
 	include RecentReports
 
-	skip_before_action :authorize, only: [:profile]
+	skip_before_action :authorize, only: [:profile, :reports]
 
   def profile
   	@user = User.find(params[:id])
   	set_recent_reports(@user)
-  rescue => e
+  rescue
   	# user not found
   	redirect_to root_path
+  end
+
+  def reports
+    @user = User.find(params[:id])
+    @reports = Report.where(author: @user).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def settings

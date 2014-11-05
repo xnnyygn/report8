@@ -4,6 +4,7 @@
 		<h2><%= t('.introduction') %></h2>
 		<div><%= simple_format(@user.introduction) %></div>
 		<h2><%= t('.recent_reports') %></h2>
+		<% if @recent_reports.any? %>
 		<% @recent_reports.each do |report| %>
 		  <div class="report">
 		    <h3>
@@ -17,6 +18,8 @@
 		      <%= l(report.created_at) %>
 		    </p>
 		  </div>
+		<% end %>
+		<%= link_to t('.more_reports'), user_reports_path(@user) %>
 		<% end %>
 	</div>
 </div>

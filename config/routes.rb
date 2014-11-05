@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
   get '/user/profile/:id', to: 'user#profile', as: 'user_profile'
+  get '/user/:id/reports', to: 'user#reports', as: 'user_reports'
   get '/user/settings'
   patch '/user/update_settings'
 

@@ -41,6 +41,7 @@ zh:
       title: "%{name}的信息"
       introduction: '个人介绍'
       recent_reports: '最近的报告'
+      more_reports: '更多报告...'
     settings:
       title: '设置'
       interface_language: '界面语言'

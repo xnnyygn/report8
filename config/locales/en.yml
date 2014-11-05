@@ -62,6 +62,7 @@ en:
       title: "Profile of %{name}"
       introduction: 'Introduction'
       recent_reports: 'Recent Reports'
+      more_reports: 'More Reports...'
     settings:
       title: 'Settings'
       interface_language: 'Interface Language'

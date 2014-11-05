@@ -41,6 +41,7 @@ jp:
       title: "%{name}"
       introduction: '自己紹介'
       recent_reports: '最近のレポート'
+      more_reports: 'もっと読む'
     settings:
       title: '設定'
       interface_language: 'インターフェイス言語'
