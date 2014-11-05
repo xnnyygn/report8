@@ -35,6 +35,10 @@ gem 'kaminari'
 
 gem 'redis'
 
+gem 'execjs'
+
+gem 'rvm-capistrano', group: :development
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
