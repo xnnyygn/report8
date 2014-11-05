@@ -33,6 +33,8 @@ gem 'tinymce-rails', '~> 3.5.9'
 
 gem 'kaminari'
 
+gem 'redis'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

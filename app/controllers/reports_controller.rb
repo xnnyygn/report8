@@ -16,6 +16,7 @@ class ReportsController < ApplicationController
   # GET /reports/1
   # GET /reports/1.json
   def show
+    @report.increase_pv
   end
 
   # GET /reports/new

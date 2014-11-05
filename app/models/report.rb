@@ -11,7 +11,22 @@ class Report < ActiveRecord::Base
   	end
   end
 
+  def pv
+    $redis.get(pv_key) || 0
+  rescue
+    0
+  end
+
+  def increase_pv
+    $redis.incr(pv_key)
+  rescue
+  end
+
   private
+
+    def pv_key
+      "report8::report::#{id}.pv"
+    end
 
   	DELIMITERS = Set.new(%w{。 ! . ?})
 
