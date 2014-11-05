@@ -1,19 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: one
   password_digest: <%= BCrypt::Password.create('secret') %>
-  interface_language: MyString
+  interface_language: en
   introduction: MyText
 
 two:
-  name: MyString
+  name: two
   password_digest: <%= BCrypt::Password.create('secret') %>
-  interface_language: MyString
+  interface_language: en
   introduction: MyText
 
 xy:
   name: XnnYygn
   password_digest: <%= BCrypt::Password.create('secret') %>
-  interface_language: zh_CN
+  interface_language: zh
+  introduction: Hello
+  email: xy@report8.com
+
+admin:
+  name: admin
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  interface_language: en
   introduction: 
+  email: admin@report8.com

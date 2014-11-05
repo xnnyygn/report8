@@ -86,6 +86,11 @@ class ReportsController < ApplicationController
         # update correction count in report
         @report.correction_count = CorrectionLog.where(report: @report).count
         @report.save
+
+        # send mail
+        if @report.author != @current_user
+          CorrectionNotifier.received(@report.author, @current_user, @report).deliver
+        end
       end
     end
     redirect_to @report

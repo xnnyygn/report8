@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031075322) do
+ActiveRecord::Schema.define(version: 20141105030104) do
 
   create_table "correction_logs", force: true do |t|
     t.integer  "report_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20141031075322) do
     t.integer  "department_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
   add_index "users", ["department_id"], name: "index_users_on_department_id"
